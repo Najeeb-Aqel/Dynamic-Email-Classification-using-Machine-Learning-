@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %}{% endblock title %}</title>
+
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Lora:400,400i,700" rel="stylesheet">
+  <!--Styles-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <!--animate.css-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+  <!--Google Sign In-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=start"> </script>
+
+  {% block head %}{% endblock head %}
+</head>
+<body>
+
+    <div class="border-site bs-top"></div>
+    <div class="border-site bs-right"></div>
+    <div class="border-site bs-left"></div>
+    <div class="border-site bs-bottom"></div>
+
+    {% block content %}
+    {% endblock content %}
+
+    <!--bootstrap.js-->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!--retina.js-->
+    <script src="{{ url_for('static', filename='js/retina.min.js') }}"></script>
+    <!--Google Login-->
+    <script>
+    function signInCallback(authResult) {
+      if (authResult['code']) {
+        //Hide the sign-in button once the user is authorized
+        $('#login').attr('style','display:none');
+        // Send one-time-use code to the server, if server responds,
+        // write a 'login successful' message to the web page and then
+        // redirect back to the main restaurants page
+        $.ajax({
+          type: 'POST',
+          url: '/gconnect?state={{STATE}}',
+          processData: false,
+          data: authResult['code'],
+          contentType: 'application/octet-stream; charset=utf-8',
+          success: function(result) {
+            // Handle or verify the server response if necessary.
+            if (result) {
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...');
+              setTimeout(function() {
+                window.location.href = "/catalog";
+              }, 4000);
+            } else if (authResult['error']) {
+              console.log('There was an error: ' + authResult['error']);
+            } else {
+              $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+            }
+          },
+          error: function(result) {
+            console.log('There was an error: ' + result);
+          }
+
+      }); } }
+    </script>
+    <!--/Google Login-->
+</body>
+</html>

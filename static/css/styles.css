@@ -1,0 +1,493 @@
+/*---------------------------------------------*\
+    Theme Name  : Item-Catalog
+    Description : Minimal Item - Catalog
+    Version     : 1.0
+\*---------------------------------------------*/
+
+/**
+*    Table of Contents:
+*    01. Reset
+*    02. Typography
+*    03. Padding
+*    04. Border
+*    05. Background grid
+*    06. Border site
+*    07. Section
+*    08. Navigation
+*    09. Section-Catalog
+*    10. Section-ShowItem
+*    11. Section-Items
+**/
+
+
+/*------------------------------------*\
+    01. Reset
+\*------------------------------------*/
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #f5f5f5;
+  background-image: url("../img/bright-squares.png");
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .02em;
+  overflow-x: hidden;
+}
+p {
+  margin: 0;
+}
+img {
+  -webkit-backface-visibility: hidden;
+  height: auto;
+  max-width: 100%;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul,
+ol,
+dl {
+  list-style-position: outside;
+}
+input,
+textarea,
+select {
+  border: 2px solid #eaeaea;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin: 0 0 20px 0;
+  max-width: 100%;
+  padding: 13px 15px;
+  resize: none;
+  width: 100%;
+}
+input[type="submit"] {
+  width: auto;
+}
+input[type="button"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="submit"],
+input[type="text"],
+textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+}
+input[type="submit"]:focus {
+  border: none;
+}
+select::-ms-expand {
+  display: none;
+}
+::selection {
+  background: #f2f2f2;
+  color: #292627;
+}
+::-moz-selection {
+  background: #f2f2f2;
+  color: #292627;
+}
+::-webkit-input-placeholder {
+  color: #a9a6a8 !important;
+  letter-spacing: 2px;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+:-moz-placeholder {
+  color: #a9a6a8 !important;
+  letter-spacing: 2px;
+  opacity: 1;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+:-ms-input-placeholder {
+  color: #a9a6a8 !important;
+  letter-spacing: 2px;
+  opacity: 1;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+
+
+/*------------------------------------*\
+    02. Typography
+\*------------------------------------*/
+
+/**
+* Heading
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Bree Serif', serif;
+  margin: 0;
+  padding: 0;
+  color: #9A9898;
+}
+h1 {
+  font-size: 45px;
+  line-height: 50px;
+}
+h2 {
+  font-size: 40px;
+  line-height: 45px;
+}
+h3 {
+  font-size: 35px;
+  line-height: 40px;
+}
+h4 {
+  font-size: 25px;
+  line-height: 30px;
+}
+h5 {
+  font-size: 20px;
+  line-height: 25px;
+}
+h6 {
+  font-size: 18px;
+  line-height: 23px;
+}
+
+
+/*------------------------------------*\
+    03. Padding
+\*------------------------------------*/
+
+.no-padding {
+  padding: 0 !important;
+}
+.no-padding-top {
+  padding-top: 0 !important;
+}
+.no-padding-right {
+  padding-right: 0 !important;
+}
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+.no-padding-left {
+  padding-left: 0 !important;
+}
+.no-padding-tb {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.no-padding-rl {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.padding-top-10 {
+  padding-top: 10px;
+}
+.padding-top-20 {
+  padding-top: 20px;
+}
+.padding-top-49 {
+  padding-top: 49px;
+}
+.padding-bottom-19 {
+  padding-bottom: 19px;
+}
+.padding-bottom-26 {
+  padding-bottom: 26px;
+}
+.padding-left-10 {
+  padding-left: 10px;
+}
+
+
+/*------------------------------------*\
+    04. Border
+\*------------------------------------*/
+
+.no-border {
+  border: none !important;
+}
+.no-border-top {
+  border-top: none !important;
+}
+.no-border-right {
+  border-right: none !important;
+}
+.no-border-bottom {
+  border-bottom: none !important;
+}
+.no-border-left {
+  border-left: none !important;
+}
+.no-border-tb {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.no-border-rl {
+  border-right: none !important;
+  border-left: none !important;
+}
+.no-border-radius {
+  border-radius: 0 !important;
+}
+.border-circled {
+  border-radius: 50% !important;
+}
+.border-rounded {
+  border-radius: 3px !important;
+}
+
+
+/*------------------------------------*\
+    05. Background grid
+\*------------------------------------*/
+
+.background-grid {
+  opacity: 0.6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+.background-grid > .column {
+  border-left: 1px solid #dad9da;
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  position: relative;
+  width: 33.33333%;
+  height: 100%;
+}
+@media (min-width: 480px) {
+  .background-grid > .column {
+    width: 25%;
+  }
+}
+@media (min-width: 767px) {
+  .background-grid > .column {
+    width: 20%;
+  }
+}
+@media (min-width: 992px) {
+  .background-grid > .column {
+    width: 16.66666%;
+  }
+}
+@media (max-width: 991px) {
+  .background-grid > .column:first-child {
+    border-left: none;
+  }
+}
+@media (max-width: 479px) {
+  .background-grid > .column:nth-child(4) {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .background-grid > .column:nth-child(5) {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .background-grid > .column:nth-child(6) {
+    display: none;
+  }
+}
+
+
+/*------------------------------------*\
+    06. Border site
+\*------------------------------------*/
+
+.border-site {
+  background-color: #dad9da;
+  position: fixed;
+  z-index: 15;
+}
+@media (max-width: 991px) {
+  .border-site {
+    display: none;
+  }
+}
+.border-site.border-site.bs-top {
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+.border-site.border-site.bs-right {
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+}
+.border-site.border-site.bs-bottom {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+}
+.border-site.border-site.bs-left {
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100%;
+}
+
+
+/*------------------------------------*\
+    07. Section
+\*------------------------------------*/
+
+.section {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  position: relative;
+  width: 100%;
+}
+
+.section-content {
+  vertical-align: middle;
+  z-index: 10;
+}
+
+/*------------------------------------*\
+    08. Navigation
+\*------------------------------------*/
+
+.navbar-brand {
+  padding: 5px 10px;
+}
+.brand-img {
+  width: 39px;
+}
+
+.navbar-margin-btn {
+  margin: 0 0 0 0;
+}
+
+/*------------------------------------*\
+    09. Section-Catalog
+\*------------------------------------*/
+
+.category-list {
+  padding-top: 10px;
+  font-size: 20px;
+  line-height: 2em;
+  list-style-type: none;
+}
+/* unvisited link */
+.category-list a:link {
+  color: #9a9898;
+  text-decoration: none;
+}
+/* visited link */
+.category-list a:visited {
+  color: #9a9898;
+}
+/* mouse over link */
+.category-list a:hover {
+  color: #9a9898;
+}
+/* selected link */
+.category-list a:active {
+  color: #9a9898;
+}
+
+.categories-right {
+
+}
+.categories-right > h1 {
+    font-size: 30px;
+}
+.categories-right > a {
+    font-size: 13px;
+    line-height: 2em;
+}
+/* unvisited link */
+.categories-right > a:link {
+    color: black;
+}
+/* visited link */
+.categories-right > a:visited {
+    color: black;
+}
+/* mouse over link */
+.categories-right > a:hover {
+    color: black;
+}
+/* selected link */
+.categories-right > a:active {
+    color: black;
+}
+
+.edit-content {
+  right: 0;
+  position: absolute;
+  z-index: 10;
+}
+
+.btn-bottom-right {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+@media (max-width: 767px) {
+    .margin-bottom-10 {
+        margin-bottom: 10px;
+    }
+}
+
+.alert {
+  margin-bottom: 0px;
+  border: none;
+}
+
+.alert-info {
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+@media (max-width: 991px) {
+    .alert-info {
+      margin-top: 50px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+}
+
+
+/*------------------------------------*\
+    10. Section-ShowItem
+\*------------------------------------*/
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+/*------------------------------------*\
+    11. Section-Items
+\*------------------------------------*/
+
+.img-center {
+  margin-left: auto;
+  margin-right: auto;
+}

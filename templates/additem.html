@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% include "nav.html" %}
+{% block content %}
+
+<section id="addItem" class="section">
+    <div class="section-content container padding-1-5">
+        <h1>Add Item</h1>
+
+        <form action="{{url_for('addItem')}}" method = "post" class="padding-top-10">
+            <div class="form-group">
+                <label for="name">Item Name:</label>
+                <input type ="text" class="form-control" id="name" maxlength="250" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="form-control" maxlength="250" cols="30" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="picture">Picture URL:</label>
+                <input type ="url" class="form-control" id="picture" maxlength="250" name="picture" placeholder="http://www.example.com">
+            </div>
+            <div class="form-group">
+                <label for="picture">Category:</label>
+                <select name="category">
+                {% for c in categories %}
+                    <option value="{{c.name}}">{{c.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                <a href="{{url_for('showCatalog')}}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
