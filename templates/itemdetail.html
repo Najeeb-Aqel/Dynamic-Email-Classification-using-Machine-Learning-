@@ -18,8 +18,8 @@
                     <img class="img-responsive" src="{{ item.picture }}" alt="{{ item.name }}">
                     <div class="caption-full">
                         <h6 class="pull-right padding-left-10">
-                            <a href = "{{url_for('deleteItem', category_name = item.category.name, item_name = item.name)}}">Delete</a>
-                            <a href = "{{url_for('editCategory', category_name = category.name)}}">Edit</a> 
+                            <a href = "{{url_for('dItem', category_name = item.category.name, item_name = item.name)}}">Delete</a>
+                            
 
                         </h6>
                         <h6 class="pull-right">

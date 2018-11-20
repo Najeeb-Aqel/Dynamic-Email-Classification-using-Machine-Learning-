@@ -16,12 +16,9 @@
             {% include "categories.html" %}
 
             <div class="col-md-9">
-                <h4 class="padding-bottom-19">Latest Items</h4>
+                <h4 class="padding-bottom-19">Latest Modifications</h4>
                 {% for i in items %}
                 <div class="thumbnail">
-                    <div class="caption-full">
-                        <img class="img-responsive img-center" src="{{ i.picture }}" alt="{{ i.name }}">
-                    </div>
                     <a href = "{{url_for('showItem', category_name = i.category.name, item_name = i.name)}}">
                         <h4>{{ i.name }}</h4>
                         <h6 class="pull-right">Last update: {{ i.date.strftime("%-d-%b-%Y at %I:%M %p") }}</h6>

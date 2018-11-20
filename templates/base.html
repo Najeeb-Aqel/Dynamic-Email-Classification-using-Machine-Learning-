@@ -16,6 +16,11 @@
   <!--Google Sign In-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=start"> </script>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
 
   {% block head %}{% endblock head %}
 </head>
@@ -33,6 +38,28 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!--retina.js-->
     <script src="{{ url_for('static', filename='js/retina.min.js') }}"></script>
+    <script>
+    var myConfig = {
+      type: 'wordcloud',
+      options: {
+      text: 'We the people of the United States, in order to form a more perfect union, establish justice, insure domestic tranquility, provide for the common defense, promote the general welfare, and secure the blessings of liberty to ourselves and our posterity, do ordain and establish this Constitution for the United States of America.',
+      "style": {
+            "tooltip": {
+              visible: true,
+              text: '%text: %hits'
+            }
+          },
+    
+    }
+    };
+ 
+  zingchart.render({ 
+	  id: 'myChart', 
+	  data: myConfig, 
+	  height: 400, 
+	  width: '100%' 
+  });
+    </script>
     <!--Google Login-->
     <script>
     function signInCallback(authResult) {

@@ -7,7 +7,7 @@
         <h1>Delete Item</h1>
         <p class="padding-top-10">Are you sure you want to delete {{item.name}}?</p>
 
-        <form action="{{url_for('deleteItem', category_name = item.category.name, item_name = item.name)}}" method = "post">
+        <form action="{{url_for('dItem', category_name = item.category.name, item_name = item.name)}}" method = "post">
             <div class="form-group padding-top-10">
                 <button type="submit" id="submit" class="btn btn-danger">Delete</button>
                 <a href="{{url_for('showCategory', category_name = item.category.name)}}">

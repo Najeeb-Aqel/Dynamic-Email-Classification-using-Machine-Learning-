@@ -1,0 +1,122 @@
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock title %}</title>
+      
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <!--Google Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Lora:400,400i,700" rel="stylesheet">
+        <!--Styles-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <!--animate.css-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+        <!--Google Sign In-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://apis.google.com/js/platform.js?onload=start"> </script>
+        <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+        <script>
+          zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+          ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+        </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['treemap']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Location', 'Parent', 'Market trade volume (size)', 'Market increase/decrease (color)'],
+          ['Global',    null,                 0,                               0],
+          ['America',   'Global',             0,                               0],
+          ['Europe',    'Global',             0,                               0],
+          ['Asia',      'Global',             0,                               0],
+          ['Australia', 'Global',             0,                               0],
+          ['Africa',    'Global',             0,                               0],
+          ['Brazil',    'America',            11,                              10],
+          ['USA',       'America',            52,                              31],
+          ['Mexico',    'America',            24,                              12],
+          ['Canada',    'America',            16,                              -23],
+          ['France',    'Europe',             42,                              -11],
+          ['Germany',   'Europe',             31,                              -2],
+          ['Sweden',    'Europe',             22,                              -13],
+          ['Italy',     'Europe',             17,                              4],
+          ['UK',        'Europe',             21,                              -5],
+          ['China',     'Asia',               36,                              4],
+          ['Japan',     'Asia',               20,                              -12],
+          ['India',     'Asia',               40,                              63],
+          ['Laos',      'Asia',               4,                               34],
+          ['Mongolia',  'Asia',               1,                               -5],
+          ['Israel',    'Asia',               12,                              24],
+          ['Iran',      'Asia',               18,                              13],
+          ['Pakistan',  'Asia',               11,                              -52],
+          ['Egypt',     'Africa',             21,                              0],
+          ['S. Africa', 'Africa',             30,                              43],
+          ['Sudan',     'Africa',             12,                              2],
+          ['Congo',     'Africa',             10,                              12],
+          ['Zaire',     'Africa',             8,                               10]
+        ]);
+
+        tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
+
+        tree.draw(data, {
+          minColor: '#f00',
+          midColor: '#ddd',
+          maxColor: '#0d0',
+          headerHeight: 15,
+          fontColor: 'black',
+          showScale: true
+        });
+
+      }
+    </script>
+  </head>
+  <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                  <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{url_for('showCatalog')}}">
+                      <img class="brand-img" src="{{ url_for('static', filename='img/logo.png') }}" alt="Item Catalog Logo">
+                    </a>
+                    {% if 'username' not in session %}
+                    <a href="{{url_for('showLogin')}}" class="navbar-text navbar-margin-btn">
+                      <button type="button" class="btn btn-default navbar-btn">
+                      Log In
+                      </button>
+                    </a>
+                    {% else %}
+                    <a href="{{url_for('gdisconnect')}}" class="navbar-text navbar-margin-btn">
+                      <button type="button" class="btn btn-default navbar-btn">
+                      Logout
+                      </button>
+                    </a>
+                    {% endif %}
+                  </div>
+              
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              
+                    {% if 'username' not in session %}
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{{url_for('addTrigger')}}">Add Triggers</a></li>
+                    </ul>
+                    {% endif %}
+                  </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+              </nav>
+    <section id="itemDetail" class="section">
+        <div id="chart_div" style="width: 100%; height: 100%;"></div>
+    </section>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!--retina.js-->
+    <script src="{{ url_for('static', filename='js/retina.min.js') }}"></script>
+  </body>
+</html>

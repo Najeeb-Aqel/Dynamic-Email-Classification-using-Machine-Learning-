@@ -25,22 +25,28 @@
                     <a href = "{{url_for('editCategory', category_name = category)}}">Edit Topic</a> 
 
                 </h6>
+                <h6 class="pull-right padding-left-10">
+
+                    <a href = "{{url_for('mergeCategory', category_name = category)}}">Merge Topics</a> 
+
+                </h6>
                 <h6 class="pull-right">
 
-                    <a href = "{{url_for('editCategory', category_name = category)}}">Edit Topic</a> 
+                    <a href = "http://js.cytoscape.org/demos/cose-layout/">Relationship graph</a> 
 
                 </h6>
                 <h6 class="padding-bottom-26">Terms (<strong>{{count}}</strong>)</h6>
                 {% for i in items %}
                 <div class="thumbnail text-center">
-                    <div class="caption-full">
-                        <img class="img-responsive img-center" src="{{ i.picture }}" alt="{{ i.name }}">
-                    </div>
+                    
                     <a href = "{{url_for('showItem', category_name = i.category.name, item_name = i.name)}}">
                         <h4>{{ i.name }}</h4>
+                        <h6 class="pull-right">Last update: {{ i.date.strftime("%-d-%b-%Y at %I:%M %p") }}</h6>
+
                     </a>
                 </div>
                 {% endfor %}
+                <div id="myChart" class="thumbnail text-center"><a class="zc-ref" href="https://www.zingchart.com">Powered by ZingChart</a></div>
             </div>
 
         </div>

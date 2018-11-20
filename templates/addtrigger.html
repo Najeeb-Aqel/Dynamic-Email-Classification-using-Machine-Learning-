@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% include "nav.html" %}
+{% block content %}
+
+<section id="addItem" class="section">
+    <div class="section-content container padding-1-5">
+        <h1>Add Trigger</h1>
+
+        <form action="{{url_for('addTrigger')}}" method = "post" class="padding-top-10">
+            <div class="form-group">
+                <label for="name">E-mail to notify:</label>
+                <input type ="text" class="form-control" id="name" maxlength="250" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="form-control" maxlength="250" cols="30" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="picture">Chosse a category to trace:</label>
+                <select name="category">
+                {% for c in categories %}
+                    <option value="{{c.name}}">{{c.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                <a href="{{url_for('showCatalog')}}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

@@ -27,6 +27,7 @@
 body,
 html {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -490,4 +491,14 @@ h6 {
 .img-center {
   margin-left: auto;
   margin-right: auto;
+}
+
+#myChart {
+  height: 100%;
+  width: 100%;
+  min-height: 150px;
+}
+
+.zc-ref {
+  display: none;
 }

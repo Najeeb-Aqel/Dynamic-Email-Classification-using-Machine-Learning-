@@ -9,6 +9,7 @@ from database_setup import *
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import os, random, string, datetime, json, httplib2, requests
+from flask_mail import Mail,  Message
 # Import login_required from login_decorator.py
 from login_decorator import login_required
 
@@ -16,6 +17,21 @@ from login_decorator import login_required
 # Flask instance
 #===================
 app = Flask(__name__)
+
+mail=Mail(app)
+
+app.config.update(
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'youremail',
+	MAIL_PASSWORD = 'youremail-password'
+	)
+
+mail=Mail(app)
+
 
 #===================
 # GConnect CLIENT_ID
@@ -212,6 +228,31 @@ def showCatalog():
                             categories = categories,
                             items = items)
 
+
+# dashboard
+@app.route('/dashboard/')
+def showDashboard():
+    return render_template('dashboard.html')
+
+
+
+# Add a Trigger
+@app.route('/catalog/trigger', methods=['GET', 'POST'])
+@login_required
+def addTrigger():
+    categories = session.query(Category).all()
+    if request.method == 'POST':
+        msg = Message('Hello',
+                      sender='najeebaqely@gmail.com',
+                      recipients=[request.form['name']])
+        msg.body = request.form['description']
+        mail.send(msg)
+        flash('Trigger has been Added!')
+        return redirect(url_for('showCatalog'))
+    else:
+        return render_template('addtrigger.html', categories=categories)
+
+
 # Category Items
 @app.route('/catalog/<path:category_name>/items/')
 def showCategory(category_name):
@@ -297,6 +338,46 @@ def editCategory(category_name):
                                 categories=editedCategory,
                                 category = category)
 
+
+# Merge Topics 
+@app.route('/catalog/<path:category_name>/merge', methods=['GET', 'POST'])
+@login_required
+def mergeCategory(category_name):
+    mergedCategory = session.query(Category).filter_by(name=category_name).one()
+    category = session.query(Category).filter_by(name=category_name).one()
+    categories = session.query(Category).all()
+    # See if the logged in user is the owner of item
+    creator = getUserInfo(mergedCategory.user_id)
+    user = getUserInfo(login_session['user_id'])
+    # If logged in user != item owner redirect them
+    if creator.id != login_session['user_id']:
+        flash ("You cannot merge this Topic. This Topic belongs to %s" % creator.name)
+        return redirect(url_for('showCatalog'))
+    # POST methods
+    if request.method == 'POST':
+        if request.form['name']:
+            mergedCategory = session.query(Category).filter_by(name=request.form['category']).one()
+            items = session.query(Items).filter_by(category=mergedCategory).order_by(asc(Items.name)).all()
+            for i in items:
+                i.category_id = category.id
+                category = category
+                session.add(i)
+                session.commit() 
+            category.name = request.form['name']
+        session.add(category)
+        session.commit()
+        session.delete(mergedCategory)
+        session.commit()
+        
+        flash('Category Topics Successfully Merged!')
+        return  redirect(url_for('showCatalog'))
+    else:
+        return render_template('mergecategory.html',
+                                categories=categories,
+                                category = category)
+
+
+
 # Delete a category
 @app.route('/catalog/<path:category_name>/delete', methods=['GET', 'POST'])
 @login_required
@@ -340,7 +421,7 @@ def addItem():
                                 categories=categories)
 
 # Edit an item
-@app.route('/catalog/<path:category_name>/<path:item_name>/edit', methods=['GET', 'POST'])
+@app.route('/catalog/<path:category_name>/<path:item_name>/ed', methods=['GET', 'POST'])
 @login_required
 def editItem(category_name, item_name):
     editedItem = session.query(Items).filter_by(name=item_name).one()
@@ -376,9 +457,9 @@ def editItem(category_name, item_name):
                                 categories=categories)
 
 # Delete an item
-@app.route('/catalog/<path:category_name>/<path:item_name>/delete', methods=['GET', 'POST'])
+@app.route('/catalog/<path:category_name>/<path:item_name>/de', methods=['GET', 'POST'])
 @login_required
-def deleteItem(category_name, item_name):
+def dItem(category_name, item_name):
     itemToDelete = session.query(Items).filter_by(name=item_name).one()
     category = session.query(Category).filter_by(name=category_name).one()
     categories = session.query(Category).all()
