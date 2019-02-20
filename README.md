@@ -1,8 +1,11 @@
-# Item Catalog Web App
-This web app is a project for the Udacity [FSND Course](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).
 
 ## About
-This project is a RESTful web application utilizing the Flask framework which accesses a SQL database that populates categories and their items. OAuth2 provides authentication for further CRUD functionality on the application. Currently OAuth2 is implemented for Google Accounts.
+More than 80% of data that companies collect about their customers is an unstructured data and
+just very few of them make good use of it.
+Emails are considered one of the biggest channels of unstructured data for companies, for some it’s the main tool to reach and interact with their customers, in this century we have seen new startups more than any time before with business models built around emails, such as email marketing, management, and email scripting.
+More than twenty percent of user’s time is spent on email classification, unfortunately traditional classification techniques are usually primitive and un-flexible, leading to un-meaningful output that of no help for users.
+In this project, a dynamic continuous refinement-approach has been taken to reach a more meaningful classification of emails that can truly give companies the advantage of being aware of their own environment, and willing take actions based on these new realizations.
+The user will be given privilege to align the classification model based on their businesses’ needs and goals, through a direct interactive tool that will give the user broader perspective of both the human and the statistical parts of the data.
 
 ## In This Repo
 This project has one main Python module `app.py` which runs the Flask application. A SQL database is created using the `database_setup.py` module and you can populate the database with test data using `database_init.py`.
